@@ -4,7 +4,8 @@ public struct InitialsUI<Content: View>: View {
     @Binding var text: String
     var fontWeight: Font.Weight = .regular
     var foregroundColor: Color?
-    
+    var font: Font?
+
     let background: Content
     
     var initials: String {
@@ -29,11 +30,13 @@ public struct InitialsUI<Content: View>: View {
     /// - Returns: A view with the initials from provided the string
     public init(text: Binding<String>,
                 foregroundColor: Color = .white,
+                font: Font? = nil,
                 fontWeight: Font.Weight? = nil,
                 @ViewBuilder background: @escaping () -> Content) {
         self.background = background()
         self._text = text
         self.foregroundColor = foregroundColor
+        self.font = font
         if let weight = fontWeight {
             self.fontWeight = weight
         }
@@ -46,7 +49,7 @@ public struct InitialsUI<Content: View>: View {
                     
                 Text(initials)
                     .foregroundColor(foregroundColor)
-                    .font(.system(size: g.size.width * 0.99))
+                    .font(font ?? .system(size: g.size.width * 0.8))
                     .fontWeight(fontWeight)
                     .modifier(FitToWidth())
                     .padding(calculatePadding(width: g.size.width))
@@ -82,12 +85,14 @@ extension InitialsUI {
     /// - Returns: A view with the provided initials
     public init(initials: String,
                 foregroundColor: Color = .white,
+                font: Font? = nil,
                 fontWeight: Font.Weight? = nil,
                 @ViewBuilder background: @escaping () -> Content) {
         let text = initials.map { "\($0)" }.joined(separator: " ")
         
         self.init(text: .constant(text),
                   foregroundColor: foregroundColor,
+                  font: font,
                   fontWeight: fontWeight,
                   background: background)
     }
