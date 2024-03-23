@@ -52,7 +52,7 @@ public struct InitialsUI<Content: View>: View {
                     .font(font ?? .system(size: g.size.width * 0.8))
                     .fontWeight(fontWeight)
                     .modifier(FitToWidth())
-                    .padding(calculatePadding(width: g.size.width))
+//                    .padding(calculatePadding(width: g.size.width))
             }
         }
     }
@@ -207,14 +207,14 @@ extension InitialsUI where Content == Color {
 }
 
 struct FitToWidth: ViewModifier {
-    var fraction: CGFloat = 2.0
+    var fraction: CGFloat = 1.0
     func body(content: Content) -> some View {
         GeometryReader { g in
             VStack {
                 Spacer()
                 content
-//                    .font(.system(size: 1000))
-                    .minimumScaleFactor(0.5)
+                    .font(.system(size: 1000))
+                    .minimumScaleFactor(0.005)
                     .lineLimit(1)
                     .frame(width: g.size.width * self.fraction)
                 Spacer()
