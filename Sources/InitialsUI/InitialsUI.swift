@@ -214,7 +214,7 @@ struct FitToWidth: ViewModifier {
                 Spacer()
                 content
                     .font(.system(size: 1000))
-                    .minimumScaleFactor(0.005)
+                    .minimumScaleFactor(0.5)
                     .lineLimit(1)
                     .frame(width: g.size.width * self.fraction)
                 Spacer()
