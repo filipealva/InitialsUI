@@ -46,7 +46,7 @@ public struct InitialsUI<Content: View>: View {
                     
                 Text(initials)
                     .foregroundColor(foregroundColor)
-                    .font(.system(size: g.size.width * 0.8))
+                    .font(.system(size: g.size.width * 0.9))
                     .fontWeight(fontWeight)
                     .modifier(FitToWidth())
                     .padding(calculatePadding(width: g.size.width))
