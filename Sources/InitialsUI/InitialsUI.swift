@@ -18,22 +18,22 @@ public struct InitialsUI<Content: View>: View {
     /// Initializes a InitialsUI View from the first letter of every word from a string
     ///
     /// ```swift
-    /// Initials(text: .constant("John Doe"), useDefaultForegroundColor: true, fontWeight: .medium) { Color.black } // Displays a View with a white medium weight JD and black background
+    /// Initials(text: .constant("John Doe"), foregroundColor: .white, fontWeight: .medium) { Color.black } // Displays a View with a white medium weight JD and black background
     /// ```
     ///
     /// - Parameter text: The text used to create the initials
-    /// - Parameter useDefaultForegroundColor: Use the default color white for the initials
+    /// - Parameter foregroundColor: Customize it or use the default white color for the initials
     /// - Parameter fontWeight: The font weight used on the initials
     /// - Parameter background: Any view as the background
     ///
     /// - Returns: A view with the initials from provided the string
     public init(text: Binding<String>,
-                useDefaultForegroundColor: Bool = true,
+                foregroundColor: Color = .white,
                 fontWeight: Font.Weight? = nil,
                 @ViewBuilder background: @escaping () -> Content) {
         self.background = background()
         self._text = text
-        self.foregroundColor = useDefaultForegroundColor ? .white : .none
+        self.foregroundColor = foregroundColor
         if let weight = fontWeight {
             self.fontWeight = weight
         }
@@ -71,23 +71,23 @@ extension InitialsUI {
     /// Initializes a InitialsUI View from the provided initials
     ///
     /// ```swift
-    /// Initials(initials: "John Doe", useDefaultForegroundColor: true, fontWeight: .medium) { Color.black } // Displays a View with a white medium weight JD and black background
+    /// Initials(initials: "John Doe", foregroundColor: .white, fontWeight: .medium) { Color.black } // Displays a View with a white medium weight JD and black background
     /// ```
     ///
     /// - Parameter initials: The initials
-    /// - Parameter useDefaultForegroundColor: Use the default color white for the initials
+    /// - Parameter foregroundColor: Customize it or use the default white color for the initials
     /// - Parameter fontWeight: The font weight used on the initials
     /// - Parameter background: Any view as the background
     ///
     /// - Returns: A view with the provided initials
     public init(initials: String,
-                useDefaultForegroundColor: Bool = true,
+                foregroundColor: Color = .white,
                 fontWeight: Font.Weight? = nil,
                 @ViewBuilder background: @escaping () -> Content) {
         let text = initials.map { "\($0)" }.joined(separator: " ")
         
         self.init(text: .constant(text),
-                  useDefaultForegroundColor: useDefaultForegroundColor,
+                  foregroundColor: foregroundColor,
                   fontWeight: fontWeight,
                   background: background)
     }
@@ -97,11 +97,11 @@ extension InitialsUI where Content == Color {
     /// Initializes a InitialsUI View with a random background color using the first letter of every word from a string
     ///
     /// ```swift
-    /// Initials(text: .constant("John Doe"), useDefaultForegroundColor: true, fontWeight: .medium, randomBackground: true) // Displays a View with a white medium weight JD and a random background
+    /// Initials(text: .constant("John Doe"), foregroundColor: .white, fontWeight: .medium, randomBackground: true) // Displays a View with a white medium weight JD and a random background
     /// ```
     ///
     /// - Parameter text: The text used to create the initials
-    /// - Parameter useDefaultForegroundColor: Use the default color white for the initials
+    /// - Parameter foregroundColor: Customize it or use the default white color for the initials
     /// - Parameter fontWeight: The font weight used on the initials
     /// - Parameter randomBackground: Use a random background
     ///
@@ -109,11 +109,11 @@ extension InitialsUI where Content == Color {
     ///
     /// - warning: If you don't want to use random backgrounds, use a different initializer!
     public init(text: Binding<String>,
-                useDefaultForegroundColor: Bool = true,
+                foregroundColor: Color = .white,
                 fontWeight: Font.Weight? = nil,
                 randomBackground: Bool) {
         self.init(text: text,
-                  useDefaultForegroundColor: useDefaultForegroundColor,
+                  foregroundColor: foregroundColor,
                   fontWeight: fontWeight) {
             if randomBackground {
                 return randomColor(for: text.wrappedValue)
@@ -126,11 +126,11 @@ extension InitialsUI where Content == Color {
     /// Initializes a InitialsUI View with a random background color using the provided initials
     ///
     /// ```swift
-    /// Initials(initials: "JD", useDefaultForegroundColor: true, fontWeight: .medium, randomBackground: true) // Displays a View with a white medium weight JD and a random background
+    /// Initials(initials: "JD", foregroundColor: .white, fontWeight: .medium, randomBackground: true) // Displays a View with a white medium weight JD and a random background
     /// ```
     ///
     /// - Parameter initials: The initials
-    /// - Parameter useDefaultForegroundColor: Use the default color white for the initials
+    /// - Parameter foregroundColor: Customize it or use the default white color for the initials
     /// - Parameter fontWeight: The font weight used on the initials
     /// - Parameter randomBackground: Use a random background
     ///
@@ -138,11 +138,11 @@ extension InitialsUI where Content == Color {
     ///
     /// - warning: If you don't want to use random backgrounds, use a different initializer!
     public init(initials: String,
-                useDefaultForegroundColor: Bool = true,
+                foregroundColor: Color = .white,
                 fontWeight: Font.Weight? = nil,
                 randomBackground: Bool) {
         self.init(initials: initials,
-                  useDefaultForegroundColor: useDefaultForegroundColor,
+                  foregroundColor: foregroundColor,
                   fontWeight: fontWeight) {
             if randomBackground {
                 return randomColor(for: initials)
@@ -157,21 +157,21 @@ extension InitialsUI where Content == Color {
     /// Initializes a InitialsUI View from the first letter of every word from a string with gray background
     ///
     /// ```swift
-    /// Initials(text: .constant("John Doe"), useDefaultForegroundColor: true, fontWeight: .medium) // Displays a View with a white medium weight JD and gray background
+    /// Initials(text: .constant("John Doe"), foregroundColor: .white, fontWeight: .medium) // Displays a View with a white medium weight JD and gray background
     /// ```
     ///
     /// - Parameter text: The text used to create the initials
-    /// - Parameter useDefaultForegroundColor: Use the default color white for the initials
+    /// - Parameter foregroundColor: Customize it or use the default white color for the initials
     /// - Parameter fontWeight: The font weight used on the initials
     ///
     /// - Returns: A view with the initials from provided the string
     ///
     /// - Warning: This initializer applies a gray background color by default!
     public init(text: Binding<String>,
-                useDefaultForegroundColor: Bool = true,
+                foregroundColor: Color = .white,
                 fontWeight: Font.Weight? = nil) {
         self.init(text: text,
-                  useDefaultForegroundColor: useDefaultForegroundColor,
+                  foregroundColor: foregroundColor,
                   fontWeight: fontWeight) {
             Color.gray
         }
@@ -180,21 +180,21 @@ extension InitialsUI where Content == Color {
     /// Initializes a InitialsUI View from the provided initials with gray background
     ///
     /// ```swift
-    /// Initials(initials: "JD", useDefaultForegroundColor: true, fontWeight: .medium) // Displays a View with a white medium weight JD and gray background
+    /// Initials(initials: "JD", foregroundColor: .white, fontWeight: .medium) // Displays a View with a white medium weight JD and gray background
     /// ```
     ///
     /// - Parameter initials: The initials
-    /// - Parameter useDefaultForegroundColor: Use the default color white for the initials
+    /// - Parameter foregroundColor: Customize it or use the default white color for the initials
     /// - Parameter fontWeight: The font weight used on the initials
     ///
     /// - Returns: A view with the initials from provided the string
     ///
     /// - Warning: This initializer applies a gray background color by default!
     public init(initials: String,
-                useDefaultForegroundColor: Bool = true,
+                foregroundColor: Color = .white,
                 fontWeight: Font.Weight? = nil) {
         self.init(initials: initials,
-                  useDefaultForegroundColor: useDefaultForegroundColor,
+                  foregroundColor: foregroundColor,
                   fontWeight: fontWeight) {
             Color.gray
         }
