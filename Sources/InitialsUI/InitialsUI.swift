@@ -207,7 +207,7 @@ extension InitialsUI where Content == Color {
 }
 
 struct FitToWidth: ViewModifier {
-    var fraction: CGFloat = 1.0
+    var fraction: CGFloat = 2.0
     func body(content: Content) -> some View {
         GeometryReader { g in
             VStack {
