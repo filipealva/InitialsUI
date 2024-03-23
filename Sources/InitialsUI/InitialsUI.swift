@@ -52,7 +52,6 @@ public struct InitialsUI<Content: View>: View {
                     .font(font ?? .system(size: g.size.width * 0.8))
                     .fontWeight(fontWeight)
                     .modifier(FitToWidth())
-//                    .padding(calculatePadding(width: g.size.width))
             }
         }
     }
