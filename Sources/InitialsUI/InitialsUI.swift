@@ -213,7 +213,7 @@ struct FitToWidth: ViewModifier {
             VStack {
                 Spacer()
                 content
-                    .font(.system(size: 1000))
+//                    .font(.system(size: 1000))
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
                     .frame(width: g.size.width * self.fraction)
